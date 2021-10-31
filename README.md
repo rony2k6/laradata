@@ -21,6 +21,9 @@ A test app to show/filter data, using laravel, prosgres, redis
 - php artisan migrate --seed
 - php artisan serve
 
+## Output Snap
+
+![alt text](screenshot.png "Output screenshot")
 
 ## License
 
