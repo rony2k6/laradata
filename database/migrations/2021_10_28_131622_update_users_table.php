@@ -16,7 +16,7 @@ class UpdateUsersTable extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->string('password')->nullable()->change();
             $table->after('password', function ($table) {
-                $table->dateTimeTz('dob')->index();
+                $table->timestamp('dob')->index();
                 $table->string('phone');
                 $table->ipAddress('ip');
                 $table->string('country');
