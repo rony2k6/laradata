@@ -14,7 +14,7 @@ A test app to show/filter data, using laravel, prosgres, redis
 
 ## Installation
 
-- git clone <repo url> && cd [project directory]/
+- git clone [repo url] && cd [project directory]/
 - composer install
 - write db credential in `.env` file following `.env.example`
 - place `test-data.csv` inside database/seeders/seeds/ directory then rename to `users.csv`.
