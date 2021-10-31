@@ -19,6 +19,7 @@ A test app to show/filter data, using laravel, prosgres, redis
 - write db credential in `.env` file following `.env.example`
 - place `test-data.csv` inside database/seeders/seeds/ directory then rename to `users.csv`.
 - php artisan migrate --seed
+- php artisan key:generate
 - php artisan serve
 
 ## Output Snap
