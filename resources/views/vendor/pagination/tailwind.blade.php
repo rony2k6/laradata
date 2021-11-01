@@ -1,5 +1,5 @@
 @if ($paginator->hasPages())
-    <nav role="navigation" aria-label="{{ __('Pagination Navigation') }}" class="flex items-center justify-between">
+    <nav role="navigation" aria-label="{{ __('Pagination Navigation') }}" class="flex items-center justify-between bg-white px-2">
         <div class="flex justify-between flex-1 sm:hidden">
             @if ($paginator->onFirstPage())
                 <span class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 cursor-default leading-5 rounded-md">
@@ -23,7 +23,6 @@
         </div>
 
         <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between flex-row-reverse space-x-4 space-x-reverse">
-
 
             <div>
                 <span class="font-medium">{{ $paginator->total() }}</span>
@@ -54,7 +53,7 @@
                             @foreach ($element as $page => $url)
                                 @if ($page == $paginator->currentPage())
                                     <span aria-current="page">
-                                        <span class="relative inline-flex items-center px-4 py-2 -ml-px text-sm font-medium text-gray-500 bg-white border border-gray-300 cursor-default leading-5"> {{ ( ($page - 1) * $paginator->perPage()) }} - {{ ($page * $paginator->perPage()) }} of {{ $paginator->total() }}</span>
+                                        <span class="relative inline-flex items-center px-4 py-2 -ml-px text-sm font-medium text-black-500 bg-white cursor-default leading-5"> {{ ( ($page - 1) * $paginator->perPage()) }} - {{ ($page * $paginator->perPage()) }} of {{ $paginator->total() }}</span>
                                     </span>
                                 @endif
                             @endforeach

@@ -58,72 +58,80 @@
                             </div>
                         </div>
                     </div>
-                    <div class="border-b border-gray-200 bg-white-200 shadow space-y-8 my-8">
 
-                        <div class="mt-10 sm:mt-0">
-                        @if ( count($users) > 0 )
-                            {{ $users->links() }}
-                            <table class="divide-y divide-gray-300 ">
-                                <thead class="bg-white">
-                                    <tr>
-                                        <th class="px-6 py-2 text-xs text-gray-500">
-                                            Email
-                                        </th>
-                                        <th class="px-6 py-2 text-xs text-gray-500">
-                                            ID
-                                        </th>
-                                        <th class="px-6 py-2 text-xs text-gray-500">
-                                            Full Name
-                                        </th>
-                                        <th class="px-6 py-2 text-xs text-gray-500">
-                                            Location
-                                        </th>
-                                        <th class="px-6 py-2 text-xs text-gray-500">
-                                            Birth Date
-                                        </th>
-                                        <th class="px-6 py-2 text-xs text-gray-500">
-                                            IP
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody class="bg-white divide-y divide-gray-300">
-                                    @foreach($users as $user)
-                                    <tr class="whitespace-nowrap">
-                                        <td class="px-6 py-4 text-sm text-gray-500">
-                                            {{$user->email}}
-                                        </td>
-                                        <td class="px-6 py-4">
-                                            <div class="text-sm text-gray-900">
-                                                {{$user->id}}
-                                            </div>
-                                        </td>
-                                        <td class="px-6 py-4">
-                                            <div class="text-sm text-gray-500">{{$user->name}}</div>
-                                        </td>
-                                        <td class="px-6 py-4 text-sm text-gray-500">
-                                            {{$user->country}}
-                                        </td>
-                                        <td class="px-6 py-4">
-                                            {{ date('d M, Y', strtotime($user->dob)) }}
-                                        </td>
-                                        <td class="px-6 py-4">
-                                            {{$user->ip}}
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                            {{ $users->links() }}
-                        @else
-                            <h3>Sorry, No data found.</h3>
-                        @endif
+                    <div class="flex flex-col text-left">
+                        <div class="my-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                            <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+                                <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg bg-white py-4">
+
+                                @if ( count($users) > 0 )
+                                    {{ $users->links() }}
+
+                                    <table class="min-w-full divide-y divide-gray-200 my-4">
+                                        <thead class="bg-white">
+                                            <tr>
+                                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-black-500 uppercase tracking-wider">
+                                                    Email
+                                                </th>
+                                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-black-500 uppercase tracking-wider">
+                                                    ID
+                                                </th>
+                                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-black-500 uppercase tracking-wider">
+                                                    Full Name
+                                                </th>
+                                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-black-500 uppercase tracking-wider">
+                                                    Location
+                                                </th>
+                                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-black-500 uppercase tracking-wider">
+                                                    Birth Date
+                                                </th>
+                                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-black-500 uppercase tracking-wider">
+                                                    IP
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="bg-white divide-y divide-gray-200">
+                                        @foreach($users as $user)
+                                            <tr>
+                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                    <div>
+                                                        <label class="inline-flex items-center">
+                                                            <input type="checkbox" name="{{$user->id}}" class="form-checkbox text-orange-600" />
+                                                            <span class="ml-2">{{$user->email}}</span>
+                                                        </label>
+                                                    </div>
+                                                </td>
+                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                    <div class="text-sm text-gray-900">{{$user->id}}</div>
+                                                </td>
+                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                    <div class="text-sm text-gray-900">{{$user->name}}</div>
+                                                </td>
+                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                    <div class="text-sm text-gray-900">{{$user->country}}</div>
+                                                </td>
+                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                    <div class="text-sm text-gray-900">{{ date('d M, Y', strtotime($user->dob)) }}</div>
+                                                </td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                    {{$user->ip}}
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                        </tbody>
+                                    </table>
+                                    {{ $users->links() }}
+                                @else
+                                    <h3>Sorry, No data found.</h3>
+                                @endif
+
+                            </div>
                         </div>
-
                     </div>
-
                 </div>
             </div>
         </div>
+    </div>
 
-    </body>
+</body>
 </html>
