@@ -25,10 +25,13 @@
         <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between flex-row-reverse space-x-4 space-x-reverse">
 
             <div>
-                <span class="font-medium">{{ $paginator->total() }}</span>
-                    {!! __('people in the list') !!}
 
-                <span class="relative z-0 inline-flex shadow-sm rounded-md">
+                <span class="relative z-0 inline-flex ml-8">
+                    <span class="font-medium">{{ $paginator->total() }}</span>
+                    <span class="inline-flex items-center px-2 text-sm font-medium text-black-500 bg-white cursor-default">{!! __('people in the list') !!}</span>
+                </span>
+
+                <span class="relative z-0 inline-flex ml-6">
                     {{-- Previous Page Link --}}
                     @if ($paginator->onFirstPage())
                         <span aria-disabled="true" aria-label="{{ __('pagination.previous') }}">
