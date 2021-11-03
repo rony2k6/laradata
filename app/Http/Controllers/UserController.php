@@ -15,50 +15,54 @@ class UserController extends Controller
         $cache_timeout = 60; // in seconds
         $per_page = $request->perpage ?? 20;
         $page = $request->page ?? 1;
-        $cache_key = 'user_all_pp_' . $per_page.'_p_'.$page;
+        $cache_key = 'user_all';
         $query = User::query();
 
         if ( $search_year && $search_month ){
 
-            $cache_key = 'user_y_'. $search_year . '_and_m_' . $search_month . '_pp_' . $per_page.'_p_'.$page;
+            $cache_key = 'user_y_'. $search_year . '_and_m_' . $search_month;
 
-            $users = Cache::remember($cache_key, $cache_timeout, function () use ($query, $search_year, $search_month, $per_page) {
+            $users = Cache::remember($cache_key, $cache_timeout, function () use ($query, $search_year, $search_month) {
                 return $query->whereYear('dob', $search_year)
                         ->whereMonth('dob', $search_month)
-                        ->paginate($per_page);
+                        ->get();
             });
 
         } elseif ( $search_year || $search_month ){
 
             if(!$search_month){
-                $cache_key = 'user_y_'. $search_year . '_pp_' . $per_page.'_p_'.$page;
+                $cache_key = 'user_y_'. $search_year;
 
-                $users = Cache::remember($cache_key, $cache_timeout, function () use ($query, $search_year,$per_page) {
+                $users = Cache::remember($cache_key, $cache_timeout, function () use ($query, $search_year) {
                     return $query->whereYear('dob', $search_year)
-                            ->paginate($per_page);
+                            ->get();
                 });
             }
 
             if(!$search_year){
-                $cache_key = 'user_m_' . $search_month . '_pp_' . $per_page.'_p_'.$page;
+                $cache_key = 'user_m_' . $search_month;
 
-                $users = Cache::remember($cache_key, $cache_timeout, function () use ($query, $search_month, $per_page) {
+                $users = Cache::remember($cache_key, $cache_timeout, function () use ($query, $search_month) {
                     return $query->whereMonth('dob', $search_month)
-                            ->paginate($per_page);
+                            ->get();
                 });
             }
 
         } else {
 
-            $users = Cache::remember($cache_key, $cache_timeout, function() use ($query, $per_page) {
-                return $query->paginate($per_page);
+            $users = Cache::remember($cache_key, $cache_timeout, function() use ($query) {
+                return $query->get();
             });
 
         }
 
-        $users->appends(['year' => $search_year, 'month' => $search_month]);
+        $slice = $users->slice((($page-1) * $per_page), $per_page);
+        $paginator = new \Illuminate\Pagination\LengthAwarePaginator($slice, $users->count(), $per_page, $page, [
+            'path' => $request->url(),
+            'query' => $request->query()
+        ]);
 
-        return View('users', compact('users'));
+        return View('users')->with('users', $paginator);
     }
 
 }

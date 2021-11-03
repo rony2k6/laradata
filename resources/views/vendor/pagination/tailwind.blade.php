@@ -56,7 +56,13 @@
                             @foreach ($element as $page => $url)
                                 @if ($page == $paginator->currentPage())
                                     <span aria-current="page">
-                                        <span class="relative inline-flex items-center px-4 py-2 -ml-px text-sm font-medium text-black-500 bg-white cursor-default leading-5"> {{ ( ($page - 1) * $paginator->perPage()) }} - {{ ($page * $paginator->perPage()) }} of {{ $paginator->total() }}</span>
+                                        <span class="relative inline-flex items-center px-4 py-2 -ml-px text-sm font-medium text-black-500 bg-white cursor-default leading-5">
+                                            {{ (($page - 1) * $paginator->perPage()) == 0 ? 1 : (($page - 1) * $paginator->perPage()) }}
+                                             -
+                                            {{ ($page * $paginator->perPage()) > $paginator->total() ? $paginator->total() : ($page * $paginator->perPage()) }}
+                                             of
+                                            {{ $paginator->total() }}
+                                        </span>
                                     </span>
                                 @endif
                             @endforeach

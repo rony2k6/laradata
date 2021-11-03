@@ -5,7 +5,7 @@ A test app to show/filter data, using laravel, prosgres, redis
 ## Requirements
 
 - nginx/apache
-- php7.4+
+- php7.4+ (*Need to set ```memory_limit=2048M``` to keep all records in cache for initial page before any search)
 - postgreSQL
 - redis
 - composer
